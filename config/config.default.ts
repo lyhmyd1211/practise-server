@@ -15,24 +15,33 @@ export default (appInfo: EggAppInfo) => {
     sourceUrl: `https://github.com/eggjs/examples/tree/master/${appInfo.name}`,
   };
 
-  config.mysql = {
-    // 单数据库信息配置
-    client: {
-      // host
-      host: "127.0.0.1",
-      // 端口号
-      port: "3306",
-      // 用户名
-      user: "root",
-      // 密码
-      password: "flrshe!@!!1211",
-      // 数据库名
-      database: "qx",
-    },
-    // 是否加载到 app 上，默认开启
-    app: true,
-    // 是否加载到 agent 上，默认关闭
-    agent: false,
+  // config.mysql = {
+  //   // 单数据库信息配置
+  //   client: {
+  //     // host
+  //     host: "127.0.0.1",
+  //     // 端口号
+  //     port: "3306",
+  //     // 用户名
+  //     user: "root",
+  //     // 密码
+  //     password: "flrshe!@!!1211",
+  //     // 数据库名
+  //     database: "qx",
+  //   },
+  //   // 是否加载到 app 上，默认开启
+  //   app: true,
+  //   // 是否加载到 agent 上，默认关闭
+  //   agent: false,
+  // };
+
+  config.sequelize = {
+    dialect: "mysql",
+    host: "127.0.0.1",
+    port: 3306,
+    database: "qx",
+    username: "root",
+    password: "flrshe!@!!1211",
   };
 
   // 禁用 csrf, 解决 http 请求 403 问题 （不推荐）
