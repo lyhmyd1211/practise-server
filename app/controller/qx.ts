@@ -5,11 +5,14 @@ export default class qxController extends Controller {
     const { ctx } = this;
     const { count } = ctx.query;
     let data = await ctx.service.qx.getDate(parseInt(count));
-    data = data.map((item) => {
-      item.dtime_ec = new Date(item.dtime_ec).getTime();
+    let tmp: [{ dtime_ec: number }] = [{ dtime_ec: 0 }];
+    tmp.pop();
+    data.map((item) => {
+      console.log("时间", item.dtime_ec);
+      tmp.push({ dtime_ec: new Date(item.dtime_ec).getTime() });
       return item;
     });
-    ctx.body = data;
+    ctx.body = tmp;
   }
 
   public async getMapByDate() {
@@ -29,7 +32,7 @@ export default class qxController extends Controller {
       let id =
         moment(parseInt(date1)).format("YYYYMMDDHH") +
         (date2 % 2 === 1 ? "06" : "15");
-
+      console.log("id", id);
       let data = await ctx.service.qx.getMapByDate(id, date2);
       ctx.body = {
         code: 0,

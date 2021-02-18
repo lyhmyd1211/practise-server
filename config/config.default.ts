@@ -42,6 +42,7 @@ export default (appInfo: EggAppInfo) => {
     database: "qx",
     username: "root",
     password: "flrshe!@!!1211",
+    timezone: "+08:00",
   };
 
   // 禁用 csrf, 解决 http 请求 403 问题 （不推荐）

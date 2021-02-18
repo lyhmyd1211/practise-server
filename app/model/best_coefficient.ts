@@ -1,10 +1,10 @@
 /* indent size: 2 */
-var moment = require("moment");
+
 module.exports = (app) => {
   const DataTypes = app.Sequelize;
 
   const Model = app.model.define(
-    "ave",
+    "best_coefficient",
     {
       id_ec: {
         type: DataTypes.STRING(96),
@@ -84,7 +84,7 @@ module.exports = (app) => {
       },
     },
     {
-      tableName: "ave",
+      tableName: "best_coefficient",
     }
   );
 
