@@ -10,4 +10,5 @@ export default (app: Application) => {
   router.get("/insert", controller.home.insert);
   router.get("/getDate", controller.qx.getDate);
   router.get("/getMapByDate", controller.qx.getMapByDate);
+  router.get("/getTableData", controller.qx.getTableData);
 };
