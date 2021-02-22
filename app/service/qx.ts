@@ -49,7 +49,12 @@ export default class Qx extends Service {
     // );
   }
 
-  public async getTableData(area: string, date: number, way: number) {
+  public async getTableData(
+    area: string,
+    date: number,
+    way: number,
+    type: string = "1"
+  ) {
     let tempArea = JSON.parse(area);
     let col: [[string, string]] = [["", ""]];
     col.pop();
@@ -57,11 +62,25 @@ export default class Qx extends Service {
       let hour = (date - tempArea[index]) / (60 * 60 * 1000);
       let hourFormat = moment(tempArea[index]).format("DD-HH");
       if (hour % 24 === 0) {
-        col.push(["Tmax" + hour, hourFormat]);
-        col.push(["Tmin" + hour, hourFormat + "a"]);
+        if (hour <= 168) {
+          if (type === "1") {
+            col.push(["Tmax" + hour, hourFormat]);
+          } else if (type === "2") {
+            col.push(["Tmin" + hour, hourFormat]);
+          }
+
+          // col.push(["Tmin" + hour, hourFormat + "a"]);
+        }
       } else {
-        col.push(["Tmax" + (hour + 12), hourFormat]);
-        col.push(["Tmin" + (hour + 12), hourFormat + "a"]);
+        if (hour <= 156) {
+          if (type === "1") {
+            col.push(["Tmax" + (hour + 12), hourFormat]);
+          } else if (type === "2") {
+            col.push(["Tmin" + (hour + 12), hourFormat]);
+          }
+
+          // col.push(["Tmin" + (hour + 12), hourFormat + "a"]);
+        }
       }
     }
     console.log("col", col);
@@ -77,13 +96,5 @@ export default class Qx extends Service {
       raw: true,
       attributes: ["id_ec", "stationid", ...col],
     });
-    // return await this.app.mysql.query(
-    //   "select * from ave where dtime_ec = ?",
-    //   time
-    // );
-    // select * from table where
   }
-  // public async getDate1() {
-  //   // return await this.app.mysql.query("select ")
-  // }
 }

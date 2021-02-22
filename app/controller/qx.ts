@@ -31,7 +31,6 @@ export default class qxController extends Controller {
       let id =
         moment(parseInt(date1)).format("YYYYMMDDHH") +
         (date2 % 2 === 1 ? "06" : "15");
-      console.log("id", id);
       let data = await ctx.service.qx.getMapByDate(id, date2, way);
       ctx.body = {
         code: 0,
@@ -45,9 +44,9 @@ export default class qxController extends Controller {
 
   public async getTableData() {
     const { ctx } = this;
-    const { area, date, way } = ctx.query;
+    const { area, date, way, type } = ctx.query;
     // let time = moment(parseInt(date)).format("YYYY-MM-DD HH:mm:ss");
-    let data = await ctx.service.qx.getTableData(area, date, way);
+    let data = await ctx.service.qx.getTableData(area, date, way, type);
     let station = data.slice(0, 12).map((item) => item.stationid);
     // let areaFormat = JSON.parse(area).map((item) =>
     //   moment(item).format("DD-HH")
@@ -71,6 +70,7 @@ export default class qxController extends Controller {
           ],
         };
       } else if (
+        !result[station.indexOf(item.stationid)] ||
         !result[station.indexOf(item.stationid)][
           item.id_ec.slice(6, 8) + "-" + item.id_ec.slice(8, 10)
         ]
