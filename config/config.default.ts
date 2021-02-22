@@ -1,6 +1,7 @@
 import { EggAppConfig, EggAppInfo, PowerPartial } from "egg";
 
 export default (appInfo: EggAppInfo) => {
+  const path = require("path");
   const config = {} as PowerPartial<EggAppConfig>;
 
   // override config from framework / plugin
@@ -34,14 +35,19 @@ export default (appInfo: EggAppInfo) => {
   //   // 是否加载到 agent 上，默认关闭
   //   agent: false,
   // };
-
+  config.cluster = {
+    listen: {
+      port: 7010,
+      hostname: "0.0.0.0",
+    },
+  };
   config.sequelize = {
     dialect: "mysql",
     host: "127.0.0.1",
     port: 3306,
     database: "qx",
     username: "root",
-    password: "flrshe!@!!1211",
+    password: "FLRshe!@!!1211",
     timezone: "+08:00",
   };
 
@@ -56,7 +62,14 @@ export default (appInfo: EggAppInfo) => {
     origin: "*",
     allowMethods: "GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS",
   };
-
+  config.static = {
+    prefix: "/",
+    dir: path.join(appInfo.baseDir, "app/public"),
+    dynamic: true,
+    preload: false,
+    maxAge: 0,
+    buffer: false,
+  };
   // the return config will combines to EggAppConfig
   return {
     ...config,
