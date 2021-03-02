@@ -28,13 +28,18 @@ export default class Qx extends Service {
     // );
   }
 
-  public async getMapByDate(id: String, date2: number, way: number = 0) {
+  public async getMapByDate(id: String,date1:number, date2: number, way: number = 0) {
     let col: number = 24;
-    if (date2 % 2 === 0) {
-      col = 24 * (date2 / 2);
-    } else {
-      col = 24 * Math.ceil(date2 / 2);
+    if (((date2 - date1)/1000/60/60 )%24===0) {
+      col =(date2 - date1)/1000/60/60 
+    }else{
+      col=(date2 - date1)/1000/60/60 +12
     }
+    // if (date2 % 2 === 0) {
+    //   col = 24 * (date2 / 2);
+    // } else {
+    //   col = 24 * Math.ceil(date2 / 2);
+    // }
 
     return await this.ctx.model[this.modelName[way]].findAll({
       where: {

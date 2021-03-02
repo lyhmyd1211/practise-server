@@ -18,7 +18,7 @@ const plugin: EggPlugin = {
     enable: true,
     package: "egg-sequelize",
   },
-  static: {
+   static: {
     enable: true,
   },
 };

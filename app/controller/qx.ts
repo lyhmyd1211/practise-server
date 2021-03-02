@@ -30,8 +30,8 @@ export default class qxController extends Controller {
     } else {
       let id =
         moment(parseInt(date1)).format("YYYYMMDDHH") +
-        (date2 % 2 === 1 ? "06" : "15");
-      let data = await ctx.service.qx.getMapByDate(id, date2, way);
+        (moment(date2).format("HH")  === '08' ? "06" : "15");
+      let data = await ctx.service.qx.getMapByDate(id,date1, date2, way);
       ctx.body = {
         code: 0,
         data: {

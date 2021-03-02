@@ -1,9 +1,8 @@
 import { EggAppConfig, EggAppInfo, PowerPartial } from "egg";
 
 export default (appInfo: EggAppInfo) => {
-  const path = require("path");
   const config = {} as PowerPartial<EggAppConfig>;
-
+  const path = require("path");
   // override config from framework / plugin
   // use for cookie sign key, should change to your own and keep security
   config.keys = appInfo.name + "_1583680502836_7820";
@@ -26,7 +25,7 @@ export default (appInfo: EggAppInfo) => {
   //     // 用户名
   //     user: "root",
   //     // 密码
-  //     password: "flrshe!@!!1211",
+  //     password: "FLRshe!@!!1211",
   //     // 数据库名
   //     database: "qx",
   //   },
@@ -35,19 +34,14 @@ export default (appInfo: EggAppInfo) => {
   //   // 是否加载到 agent 上，默认关闭
   //   agent: false,
   // };
-  config.cluster = {
-    listen: {
-      port: 7010,
-      hostname: "0.0.0.0",
-    },
-  };
+
   config.sequelize = {
     dialect: "mysql",
-    host: "127.0.0.1",
+    host: "10.206.128.113",
     port: 3306,
-    database: "qx",
+    database: "micaps",
     username: "root",
-    password: "FLRshe!@!!1211",
+    password: "qxt8233324",
     timezone: "+08:00",
   };
 
