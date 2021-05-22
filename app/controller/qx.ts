@@ -46,7 +46,11 @@ export default class qxController extends Controller {
     const { ctx } = this;
     const { area, date, way, type } = ctx.query;
     // let time = moment(parseInt(date)).format("YYYY-MM-DD HH:mm:ss");
-    let data = await ctx.service.qx.getTableData(area, date, way, type);
+    let resultData = await ctx.service.qx.getTableData(area, parseInt(date), way, type);
+    let data = resultData[0]
+    let colorData = resultData[1]
+    console.log('color',data,colorData)
+    // let colorData = await ctx.service.qx.getTableColorData(area,date,way,type)
     let station = data.slice(0, 12).map((item) => item.stationid);
     // let areaFormat = JSON.parse(area).map((item) =>
     //   moment(item).format("DD-HH")
@@ -65,9 +69,13 @@ export default class qxController extends Controller {
           [item.id_ec.slice(6, 8) + "-" + item.id_ec.slice(8, 10)]: item[
             item.id_ec.slice(6, 8) + "-" + item.id_ec.slice(8, 10)
           ],
-          [item.id_ec.slice(6, 8) + "-" + item.id_ec.slice(8, 10) + "a"]: item[
-            item.id_ec.slice(6, 8) + "-" + item.id_ec.slice(8, 10) + "a"
-          ],
+
+          // item.dtime_ec
+
+          // [item.id_ec.slice(6, 8) + "-" + item.id_ec.slice(8, 10) + "a"]:
+          // [item.id_ec.slice(6, 8) + "-" + item.id_ec.slice(8, 10) + "a"]: item[
+          //   item.id_ec.slice(6, 8) + "-" + item.id_ec.slice(8, 10) + "a"
+          // ],//a 和b分别对应最大值和最小值 ，前端页面也要改
         };
       } else if (
         !result[station.indexOf(item.stationid)] ||
@@ -80,6 +88,7 @@ export default class qxController extends Controller {
           time: item.stationid,
           [item.id_ec.slice(6, 8) + "-" + item.id_ec.slice(8, 10)]: "-",
           [item.id_ec.slice(6, 8) + "-" + item.id_ec.slice(8, 10) + "a"]: "-",
+          [item.id_ec.slice(6, 8) + "-" + item.id_ec.slice(8, 10) + "b"]: "-",
         };
       }
     });

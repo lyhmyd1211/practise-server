@@ -7,6 +7,7 @@ import ExportBestCoefficient from '../../../app/model/best_coefficient';
 import ExportDoubleWeightedAverage from '../../../app/model/double_weighted_average';
 import ExportEc_2t from '../../../app/model/ec_2t';
 import ExportPolynomialFitting from '../../../app/model/polynomial_fitting';
+import ExportSk from '../../../app/model/sk';
 
 declare module 'egg' {
   interface IModel {
@@ -15,5 +16,6 @@ declare module 'egg' {
     DoubleWeightedAverage: ReturnType<typeof ExportDoubleWeightedAverage>;
     Ec_2t: ReturnType<typeof ExportEc_2t>;
     PolynomialFitting: ReturnType<typeof ExportPolynomialFitting>;
+    Sk: ReturnType<typeof ExportSk>;
   }
 }

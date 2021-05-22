@@ -37,11 +37,11 @@ export default (appInfo: EggAppInfo) => {
 
   config.sequelize = {
     dialect: "mysql",
-    host: "10.206.128.113",
+    host: "localhost",
     port: 3306,
-    database: "micaps",
+    database: "qx",
     username: "root",
-    password: "qxt8233324",
+    password: "flrshe!@!!1211",
     timezone: "+08:00",
   };
 

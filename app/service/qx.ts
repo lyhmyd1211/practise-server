@@ -8,8 +8,8 @@ export default class Qx extends Service {
     "Ave",
     "BestCoefficient",
     "DoubleWeightedAverage",
-    "Ec_2t",
     "PolynomialFitting",
+    "Ec_2t",
   ];
   public async getDate(count = 10) {
     return await this.ctx.model.Ave.findAll({
@@ -88,8 +88,16 @@ export default class Qx extends Service {
         }
       }
     }
-    console.log("col", col);
-    return await this.ctx.model[this.modelName[way]].findAll({
+
+    console.log('param',area,date,way,type)
+    let colorData = await this.ctx.model.Sk.findAll({
+      where:{
+        sdate:{
+          [this.app.Sequelize.Op.eq]:moment(date-8*60*60*1000).format("YYYY-MM-DD HH:mm:ss")
+        }
+      }
+    })
+   let data1 = await this.ctx.model[this.modelName[way]].findAll({
       where: {
         dtime_ec: {
           [this.app.Sequelize.Op.and]: [
@@ -101,5 +109,6 @@ export default class Qx extends Service {
       raw: true,
       attributes: ["id_ec", "stationid", ...col],
     });
+    return [data1,colorData]
   }
 }
